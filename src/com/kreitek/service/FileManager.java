@@ -38,4 +38,14 @@ public class FileManager {
 
     // Aquí habría otros métodos para gestionar ficheros y directorios:
     // Crear ficheros, mover ficheros, eliminar ficheros, etc.
+
+    public static byte[] read(File fichero , int numberOfBytesToRead){
+        FileCRUD lector = new FileCRUD(fichero);
+        return lector.read(numberOfBytesToRead);
+    }
+
+    public static void write(File fichero , byte[] buffer){
+        FileCRUD lector = new FileCRUD(fichero);
+        lector.write(buffer);
+    }
 }

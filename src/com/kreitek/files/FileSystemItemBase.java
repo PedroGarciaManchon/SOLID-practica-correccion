@@ -68,11 +68,6 @@ public abstract class FileSystemItemBase implements FileSystemItem {
     @Override
     public abstract void setPosition(int numberOfBytesFromBeginning);
 
-    @Override
-    public abstract byte[] read(int numberOfBytesToRead);
-
-    @Override
-    public abstract void write(byte[] buffer);
 
     public abstract void close();
 }

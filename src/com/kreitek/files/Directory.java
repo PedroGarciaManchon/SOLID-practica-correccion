@@ -39,7 +39,17 @@ public class Directory extends FileSystemItemBase implements FileSystemItem {
 
     @Override
     public int getSize() {
-        throw new UnsupportedOperationException(NO_ES_VALIDO_PARA_DIRECTORIOS);
+        int totalSize = 0;
+        for (FileSystemItem file : files) {
+            if (file.getClass().equals(Directory.class)){
+                List<FileSystemItem> listado = file.listFiles();
+
+                for (FileSystemItem fileDerivado : listado) {
+                    totalSize += fileDerivado.getSize();
+                }
+            } else totalSize += file.getSize();
+        }
+        return totalSize;
     }
 
     @Override
@@ -53,17 +63,8 @@ public class Directory extends FileSystemItemBase implements FileSystemItem {
     }
 
     @Override
-    public byte[] read(int numberOfBytesToRead) {
-        throw new UnsupportedOperationException(NO_ES_VALIDO_PARA_DIRECTORIOS);
-    }
-
-    @Override
-    public void write(byte[] buffer) {
-        throw new UnsupportedOperationException(NO_ES_VALIDO_PARA_DIRECTORIOS);
-
-    }
-
     public void close() {
         throw new UnsupportedOperationException(NO_ES_VALIDO_PARA_DIRECTORIOS);
     }
+
 }

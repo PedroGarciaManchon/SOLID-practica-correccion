@@ -62,62 +62,15 @@ public  class File extends FileSystemItemBase implements FileSystemItem {
     }
 
     @Override
-    public byte[] read(int numberOfBytesToRead) {
-        if (position + numberOfBytesToRead > size) {
-            numberOfBytesToRead = size - position;
-        }
-        // Aquí habría lógica que lee el contenido del fichero
-        byte[] buffer = new byte[numberOfBytesToRead];
-        position += numberOfBytesToRead;
-        return buffer;
-    }
-
-    @Override
-    public void write(byte[] buffer) {
-        // Aquí habría lógica que escribiría en el fichero
-        size += buffer.length;
-        position += buffer.length;
-    }
-
-    @Override
     public void close() {
         isOpen = false;
     }
 
-    public FileSystemItem convertMp3ToWav() {
-        if (!"mp3".equalsIgnoreCase(getExtension())) {
-            throw new InvalidFileFormatException("El fichero debe ser mp3");
-        }
-
-        int indexOfLastDot = name.lastIndexOf(".");
-        String nameWithoutExtension = name;
-        if (indexOfLastDot > 0) {
-            nameWithoutExtension = name.substring(0, indexOfLastDot);
-        }
-        String newFileName = nameWithoutExtension + ".wav";
-        FileSystemItem result = new File(parent, newFileName);
-        result.open();
-        // Lógica de conversión de mp3 a wav. Se lee de este fichero y se escribe en result
-        result.close();
-        return result;
+    public void setSize(int size) {
+        this.size = size;
     }
 
-    public FileSystemItem convertWavToMp3() {
-        if (!"wav".equalsIgnoreCase(getExtension())) {
-            throw new InvalidFileFormatException("El fichero debe ser wav");
-        }
-
-        int indexOfLastDot = name.lastIndexOf(".");
-        String nameWithoutExtension = name;
-        if (indexOfLastDot > 0) {
-            nameWithoutExtension = name.substring(0, indexOfLastDot);
-        }
-        String newFileName = nameWithoutExtension + ".mp3";
-        FileSystemItem result = new File(parent, newFileName);
-        result.open();
-        // Lógica de conversión de wav a mp3. Se lee de este fichero y se escribe en result
-        result.close();
-        return result;
+    public int getPosition() {
+        return position;
     }
-
 }

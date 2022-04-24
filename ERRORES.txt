@@ -1,0 +1,2 @@
+Principio de responsabilidad unica -> FileConverter
+Principio de segregacion de interfaces -> CRUDs ; Modificado FileSystemBuilder para implementar CRUD

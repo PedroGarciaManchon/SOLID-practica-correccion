@@ -3,6 +3,7 @@ package com.kreitek.utils;
 import com.kreitek.files.Directory;
 import com.kreitek.files.File;
 import com.kreitek.files.FileSystemItem;
+import com.kreitek.service.FileCRUD;
 
 public class FileSystemBuilder {
 
@@ -21,7 +22,9 @@ public class FileSystemBuilder {
     public FileSystemBuilder addFile(String name, int size) {
         FileSystemItem file = new File(currentDirectory, name);
         file.open();
-        file.write(new byte[size]);
+        FileCRUD escritor = new FileCRUD((File) file);
+        escritor.write(new byte[size]);
+//        file.write(new byte[size]);
         file.close();
         currentDirectory.addFile(file);
         return this;
